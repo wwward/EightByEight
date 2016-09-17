@@ -53,10 +53,11 @@ boolean
 Badge::poll()
 {
 	// read the accelerometer, track the current forces
+	// Inverted "nx, ny, nz" to handle sensor orientation. - wwward
 	accel.getXYZ(nx, ny, nz);
-	ax = (ax * 7 + nx) / 8;
-	ay = (ay * 7 + ny) / 8;
-	az = (az * 7 + nz) / 8;
+	ax = (ax * 7 + -nx) / 8;
+	ay = (ay * 7 + -ny) / 8;
+	az = (az * 7 + -nz) / 8;
 
 	g = sqrt(ax*ax + ay*ay + az*az);
 	return g > 20;
